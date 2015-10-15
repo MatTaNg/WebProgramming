@@ -1,0 +1,4 @@
+		<div class = "subscribeMiddleColumn">
+		<div class = "subscribeThankYou"><h2>College Party Lifestyle<h2></div><p>
+		You have already subscribed.<p> <a href="index.html">click here to return to the main page...</a>
+		</div>

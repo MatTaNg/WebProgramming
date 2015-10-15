@@ -1,0 +1,56 @@
+1,Sixty-One,1,6.5,2
+2,Tweason'ale,2,6.0,2
+3,Namaste,3,4.8,2
+4,Palo Santo Marron,4,12.0,2
+5,Burton Baton,1,10.0,2
+6,60 Minute IPA,1,6.0,2
+7,90 Minute IPA,1,9.0,2
+8,Indian Brown Ale,4,7.2,2
+9,Midas Touch,5,9.0,2
+10,White,3,5.0,3
+11,Dubbel,6,7.0,3
+12,Tripel,7,9.0,3
+13,Black,8,7.5,3
+14,Curieux,7,11.0,3
+15,Saison,9,6.1,3
+16,ESB Ale,10,5.9,4
+17,Abbey Dubbel,6,7.2,4
+18,Extra Pale Ale,11,5.2,4
+19,Hopfish,1,6.2,4
+20,Exit 1,8,7.5,4
+21,Exit 4,7,9.5,4
+22,Exit 16,1,8.2,4
+23,Red Fish,12,7.0,4
+24,DBA(Double Barrel Ale),13,5.0,6
+25,Pale 31,13,4.9,6
+26,Union Jack,1,7.5,6
+27,Pivo,14,5.3,6
+28,Easy Jack,1,4.5,6
+29,Parabola,17,14.0,6
+30,Stickee Monkee,15,13.4,6
+31,Sucaba,16,13.5,6
+32,400 Pound Monkey IPA,1,6.8,7
+33,Black Jack Porter,18,6.8,7
+34,Milk Stout,8,6.0,7
+35,Stranger Pale Ale,11,5.0,7
+36,Good Juju,5,4.5,7
+37,Fade to Black Vol. 1,8,8.5,7
+38,Polestar Pilsner,14,5.5,7
+39,Wake Up Dead,17,10.2,7
+40,Warrior IPA,1,7.3,7
+41,Twin Sisters,1,9.6,7
+42,Chainsaw Ale,10,9.4,7
+43,Boston Lager,19,4.9,5
+44,Summer Ale,3,5.3,5
+45,OctoberFest,20,5.3,5
+46,Winter Lager,21,5.6,5
+47,Cold Snap,3,5.3,5
+48,Porch Rocker,2,4.5,5
+49,Harvest Pumpkin Ale,22,5.7,5
+50,White Christmas,3,5.8,5
+51,Pale Ale,11,5.4,8
+52,Smoked Porter,18,5.9,8
+53,IPA,1,6.9,8
+54,Ruination IPA,1,8.2,8
+55,Cali-Belgique IPA,1,6.9,8
+56,Go To IPA,1,4.5,8

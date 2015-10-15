@@ -1,0 +1,47 @@
+<style type="text/css">
+
+body {
+}
+
+#content{
+	background-color: white;
+	background-image: url('8816856-beer-mugs-seamless-contour.jpg');
+	margin-left: auto;
+	margin-right: auto;
+	width: 75%;
+	height: 1000px;
+	padding: 20px;
+	
+}
+#img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+#howTo {
+	background-color: #d3d3d3;
+	border: 3px blue solid;
+	width: 50%;
+	margin-top: 50px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	text-align: left;
+}
+#title {
+	color: red;
+	font-size: 18pt;
+	font-weight: bold;
+	text-align: center;
+}
+
+.center {
+	width: 30%;
+	background-color: white;
+	display: block;
+	margin: 0 auto;
+	
+}
+
+</style>

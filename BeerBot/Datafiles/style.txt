@@ -1,0 +1,22 @@
+1,IPA,IPA glass
+2,Fruit Beer,Tulip glass
+3,Witbier,Weizen glass
+4,Brown Ale,Pint glass
+5,Spiced Beer,Pint glass
+6,Dubbel,Goblet
+7,Tripel,Snifter
+8,Stout,Pint glass
+9,Saison,Tulip glass
+10,Extra Special Bitter,Mug
+11,American Pale Ale,Pint glass
+12,Red Ale,Pint glass
+13,English Pale Ale,Pint glass
+14,Pilsner,Pilsner glass
+15,Quad,Snifter
+16,Barley Wine,Snifter
+17,Imperial Stout,Pint glass
+18,Porter,Mug
+19,Lager,Pilsner glass
+20,Marzen,Mug
+21,Bock,Pilsner glass
+22,Pumpkin Ale,Pint glass

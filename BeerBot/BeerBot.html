@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+<!--Replace link with good web font you want.<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css' /> - See more at: http://www.newthinktank.com/2011/09/how-to-layout-a-website/#sthash.lWAaNgcS.dpuf -->
+
+<link rel="stylesheet" type="text/css" href="stylesheet.css">
+
+<!--<div class='error' style='display:none'>Event Created</div>-->
+
+<title>Beer Bot</title>
+
+</head>
+
+<body bgcolor="#000">
+	<div id = "content">
+		<div class = "center">
+			<img src = "beerBotPicture.JPG" width = "182px" height = "200px" id = "img"/>
+			<div id = "msg">
+			
+			</div>
+			<form name = "myform" action = "interpretor.php" method="GET">
+				<input type = "text" name = "inputbox" size="30%" />
+				<input type = "submit" name = "say" value="Submit" onClick="testResults(this.form)" />
+			</form>
+				</div>
+		</div>
+	</div>
+
+	<script>
+	function testResults(form) {
+		var testVar = form.inputbox.value;
+		document.getElementById("msg").innerHTML += testVar;
+	}
+	</script>
+	
+</body>
+</html>

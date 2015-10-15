@@ -1,0 +1,661 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<html>
+<head>
+<title>SWI-Prolog SSL Interface</title>
+<style type="text/css">
+
+/* Style sheet for SWI-Prolog latex2html
+*/
+
+dd.defbody
+{ margin-bottom: 1em;
+}
+
+dt.pubdef
+{ background-color: #c5e1ff;
+}
+
+dt.multidef
+{ background-color: #c8ffc7;
+}
+
+.bib dd
+{ margin-bottom: 1em;
+}
+
+.bib dt
+{ float: left;
+margin-right: 1.3ex;
+}
+
+pre.code
+{ margin-left: 1.5em;
+margin-right: 1.5em;
+border: 1px dotted;
+padding-top: 5px;
+padding-left: 5px;
+padding-bottom: 5px;
+background-color: #f8f8f8;
+}
+
+div.navigate
+{ text-align: center;
+background-color: #f0f0f0;
+border: 1px dotted;
+padding: 5px;
+}
+
+div.title
+{ text-align: center;
+padding-bottom: 1em;
+font-size: 200%;
+font-weight: bold;
+}
+
+div.author
+{ text-align: center;
+font-style: italic;
+}
+
+div.abstract
+{ margin-top: 2em;
+background-color: #f0f0f0;
+border: 1px dotted;
+padding: 5px;
+margin-left: 10%; margin-right:10%;
+}
+
+div.abstract-title
+{ text-align: center;
+padding: 5px;
+font-size: 120%;
+font-weight: bold;
+}
+
+div.toc-h1
+{ font-size: 200%;
+font-weight: bold;
+}
+
+div.toc-h2
+{ font-size: 120%;
+font-weight: bold;
+margin-left: 2em;
+}
+
+div.toc-h3
+{ font-size: 100%;
+font-weight: bold;
+margin-left: 4em;
+}
+
+div.toc-h4
+{ font-size: 100%;
+margin-left: 6em;
+}
+
+span.sec-nr
+{
+}
+
+span.sec-title
+{
+}
+
+span.pred-ext
+{ font-weight: bold;
+}
+
+span.pred-tag
+{ float: right;
+padding-top: 0.2em;
+font-size: 80%;
+font-style: italic;
+color: #202020;
+}
+
+div.caption
+{ width: 80%;
+margin: auto;
+text-align:center;
+}
+
+/* Footnotes */
+
+sup.fn { color: blue; text-decoration: underline; }
+span.fn-text { display: none; }
+sup.fn span {display: none;}
+sup:hover span
+{ display: block !important;
+position: absolute; top: auto; left: auto; width: 80%;
+color: #000; background: white;
+border: 2px solid;
+padding: 5px; margin: 10px; z-index: 100;
+font-size: smaller;
+}
+
+/* Lists */
+
+dl.latex
+{ margin-top: 1ex;
+margin-bottom: 0.5ex;
+}
+
+dl.latex dl.latex dd.defbody
+{ margin-bottom: 0.5ex;
+}
+
+/* PlDoc Tags */
+
+dl.tags
+{ font-size: 90%;
+margin-left: 5ex;
+margin-top: 1ex;
+margin-bottom: 0.5ex;
+}
+
+dl.tags dt
+{ margin-left: 0pt;
+font-weight: bold;
+}
+
+dl.tags dd
+{ margin-left: 3ex;
+}
+
+td.param
+{ font-style: italic;
+font-weight: bold;
+}
+
+/* Index */
+
+dt.index-sep
+{ font-weight: bold;
+font-size: +1;
+margin-top: 1ex;
+}
+</style>
+</head>
+<body style="background:white"> 
+<div class="title">SWI-Prolog SSL Interface</div>
+<div class="author">Jan van der Steen <br>
+<a class="url" href="http://www.diff.nl">Diff Automatisering v.o.f</a> 
+
+<p>Jan Wielemaker <br>
+SWI, University of Amsterdam <br>
+The Netherlands <br>
+E-mail: <a class="url" href="mailto:jan@swi-prolog.org">jan@swi-prolog.org</a></div>
+<div class="abstract">
+<div class="abstract-title">Abstract</div> This document describes the 
+SWI-Prolog SSL library, a set of predicates which provides secure 
+sockets to Prolog applications, for example to run a secure HTTPS 
+server, or access websites using the <code>https</code> protocol. It can 
+also be used to provide authentication and secure data exchange between 
+Prolog processes over the network.
+</div>
+
+<h1><a name="document-contents">Table of Contents</a></h1>
+
+<div class="toc">
+<div class="toc-h2"><a class="sec" href="#sec:1"><span class="sec-nr">1</span> <span class="sec-title">Introduction</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:2"><span class="sec-nr">2</span> <span class="sec-title">About 
+SSL</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:3"><span class="sec-nr">3</span> <span class="sec-title">Overview 
+of the Prolog API</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:4"><span class="sec-nr">4</span> <span class="sec-title">Backward 
+compatibility</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:5"><span class="sec-nr">5</span> <span class="sec-title">Using 
+SSL to provide and access HTTPS</span></a></div>
+<div class="toc-h3"><a class="sec" href="#sec:5.1"><span class="sec-nr">5.1</span> <span class="sec-title">Accessing 
+an HTTPS server</span></a></div>
+<div class="toc-h3"><a class="sec" href="#sec:5.2"><span class="sec-nr">5.2</span> <span class="sec-title">Creating 
+an HTTPS server</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:6"><span class="sec-nr">6</span> <span class="sec-title">Example 
+code</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:7"><span class="sec-nr">7</span> <span class="sec-title">Installation</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:8"><span class="sec-nr">8</span> <span class="sec-title">Multithreading</span></a></div>
+<div class="toc-h2"><a class="sec" href="#sec:9"><span class="sec-nr">9</span> <span class="sec-title">Acknowledgments</span></a></div>
+</div>
+<h2 id="sec:ssl-intro"><a name="sec:1"><span class="sec-nr">1</span> <span class="sec-title">Introduction</span></a></h2>
+
+<a name="sec:ssl-intro"></a>
+
+<p>Raw TCP/IP networking is dangerous for two reasons. It is hard to 
+tell whether the body you think you are talking to is indeed the right 
+one and anyone with access to a subnet through which your data flows can 
+`tap' the wire and listen for sensitive information such as passwords, 
+creditcard numbers, etc. Secure Socket Layer (SSL) deals with both 
+problems. It uses certificates to establish the identity of the peer and 
+encryption to make it useless to tap into the wire. SSL allows agents to 
+talk in private and create secure web services.
+
+<p>The SWI-Prolog <code>library(ssl)</code> library provides an API very 
+similar to
+<code>library(socket)</code> for raw TCP/IP connections that provides 
+SSL server and client sockets.
+
+<p><h2 id="sec:ssl-about"><a name="sec:2"><span class="sec-nr">2</span> <span class="sec-title">About 
+SSL</span></a></h2>
+
+<a name="sec:ssl-about"></a>
+
+<p>The SWI-Prolog SSL interface is built on top of the
+<a class="url" href="http://www.openssl.org/">OpenSSL</a> library. This 
+library is commonly provided as a standard package in many Linux 
+distributions. The MS-Windows version is built using a binary 
+distribution available from
+<a class="url" href="http://www.slproweb.com/products/Win32OpenSSL.html">http://www.slproweb.com/products/Win32OpenSSL.html</a>.
+
+<p>A good introduction on key- and certificate handling for OpenSSL can 
+be found at <a class="url" href="http://www.tldp.org/HOWTO/SSL-Certificates-HOWTO/">http://www.tldp.org/HOWTO/SSL-Certificates-HOWTO/</a>
+
+<p><h2 id="sec:ssl-prolog-api"><a name="sec:3"><span class="sec-nr">3</span> <span class="sec-title">Overview 
+of the Prolog API</span></a></h2>
+
+<a name="sec:ssl-prolog-api"></a>
+
+<p>An SSL server and client can be built with the following (abstracted) 
+predicate calls:
+
+<p><table border="2" frame="box" rules="groups" style="margin:auto">
+<tr valign="top"><td>SSL server</td><td>SSL client </td></tr>
+<tbody>
+<tr valign="top"><td><a name="idx:sslcontext3:1"></a><a class="pred" href="#ssl_context/3">ssl_context/3</a> </td><td><a name="idx:sslcontext3:2"></a><a class="pred" href="#ssl_context/3">ssl_context/3</a> </td></tr>
+<tr valign="top"><td><a name="idx:tcpsocket1:3"></a><span class="pred-ext">tcp_socket/1</span> </td><td><a name="idx:tcpsocket1:4"></a><span class="pred-ext">tcp_socket/1</span> </td></tr>
+<tr valign="top"><td><a name="idx:tcpaccept3:5"></a><span class="pred-ext">tcp_accept/3</span> </td><td><a name="idx:tcpconnect2:6"></a><span class="pred-ext">tcp_connect/2</span> </td></tr>
+<tr valign="top"><td><a name="idx:tcpopensocket3:7"></a><span class="pred-ext">tcp_open_socket/3</span> </td><td><a name="idx:tcpopensocket3:8"></a><span class="pred-ext">tcp_open_socket/3</span> </td></tr>
+<tr valign="top"><td><a name="idx:sslnegotiate5:9"></a><a class="pred" href="#ssl_negotiate/5">ssl_negotiate/5</a> </td><td><a name="idx:sslnegotiate5:10"></a><a class="pred" href="#ssl_negotiate/5">ssl_negotiate/5</a> </td></tr>
+</table>
+
+<p>The library is abstracted to communication over streams, and is not 
+reliant on those streams being directly attached to sockets. The tcp_ 
+... calls here are simply the most common way to use the library. In 
+UNIX, pipes could just as easily be used, for example.
+
+<p>What follows is a description of each of these functions and the 
+arguments they accept.
+
+<dl class="latex">
+<dt class="pubdef"><a name="ssl_context/3"><strong>ssl_context</strong>(<var>+Role, 
+-SSL, +Options</var>)</a></dt>
+<dd class="defbody">
+Role with legal values <code>server</code> or <code>client</code> 
+denotes whether the SSL instance will have a server or client role in 
+the established connection. With <var>Options</var> various properties 
+of the SSL session can be defined, some of which required, some 
+optional. An overview is given below. The handle of the connection is 
+returned in <var>SSL</var>.
+
+<p>Below is an overview of the <var>Options</var> argument. Some options 
+are only required by the client (C), some are required by the server 
+(marked S), some by both server as client (marked CS).
+
+<dl class="latex">
+<dt><strong>host</strong>(<var>+HostName</var>)</dt>
+<dd class="defbody">
+[C] The host to connect to by the client or identified by the server. 
+Both IP addresses and hostnames can be supplied here. This option is 
+required for the client and optionally for the server.
+</dd>
+<dt><strong>port</strong>(<var>+Integer</var>)</dt>
+<dd class="defbody">
+[CS] The port to connect or listen to. This option is required since no 
+default port can sensibly be defined for an abstract layer. The 
+webserver <em>https</em> protocol uses port 443.
+</dd>
+<dt><strong>certificate_file</strong>(<var>+FileName</var>)</dt>
+<dd class="defbody">
+[S] Specify where the certificate file can be found. This can be the 
+same as the key file (see next option).
+</dd>
+<dt><strong>key_file</strong>(<var>+FileName</var>)</dt>
+<dd class="defbody">
+[S] Specify where the private key can be found. This can be the same as 
+the certificate file.
+</dd>
+<dt><strong>password</strong>(<var>+Text</var>)</dt>
+<dd class="defbody">
+Specify the password the private key is protected with (if any). If you 
+do not want to store the password you can also specify an application 
+defined handler to return the password (see next option).
+</dd>
+<dt><strong>pem_password_hook</strong>(<var>:PredicateName</var>)</dt>
+<dd class="defbody">
+In case a password is required to access the private key the supplied 
+function will be called to fetch it. The function has the following 
+prototype: <code>function(+SSL, -Password)</code>
+</dd>
+<dt><strong>cacert_file</strong>(<var>+FileName</var>)</dt>
+<dd class="defbody">
+Specify a file containing certificate keys which will thus automatically 
+be verified as trusted. You can also install an application defined 
+handler to verify certificates (see next option).
+</dd>
+<dt><strong>cert_verify_hook</strong>(<var>:PredicateName</var>)</dt>
+<dd class="defbody">
+In case a certificate cannot be verified or has some properties which 
+makes it invalid (invalid validity date for example) the supplied 
+function will be called to ask its opinion about the certificate. The 
+predicate is called as follows:
+<code>function(+SSL, +ProblemCertificate, +AllCertificates, 
++FirstCertificate +Error)</code>. Access will be granted iff the 
+predicate succeeds. See load_certificate for a description of the 
+certificate terms
+</dd>
+<dt><strong>cert</strong>(<var>+Boolean</var>)</dt>
+<dd class="defbody">
+Trigger the sending of our certificate as specified using the option <code>certificate_file</code> 
+described earlier. For a server this option is automatically turned on.
+</dd>
+<dt><strong>peer_cert</strong>(<var>+Boolean</var>)</dt>
+<dd class="defbody">
+Trigger the request of our peer's certificate while establishing the SSL 
+layer. This option is automatically turned on in a client SSL socket.
+</dd>
+<dt><strong>close_parent</strong>(<var>+Boolean</var>)</dt>
+<dd class="defbody">
+If <code>true</code>, close the raw streams if the SSL streams are 
+closed.
+
+<p></dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><a name="ssl_negotiate/5"><strong>ssl_negotiate</strong>(<var>+SSL, 
++PlainRead, +PlainWrite, -SSLRead, -SSLWrite</var>)</a></dt>
+<dd class="defbody">
+Once a connection is established and a read/write stream pair is 
+available, (<var>PlainRead</var> and <var>PlainWrite</var>), this 
+predicate can be called to negotiate an SSL session over the streams. If 
+the negotiation is successful, <var>SSLRead</var> and <var>SSLWrite</var> 
+are returned.</dd>
+<dt class="pubdef"><a name="ssl_session/2"><strong>ssl_session</strong>(<var>+Stream, 
+-Session</var>)</a></dt>
+<dd class="defbody">
+Retrieves (debugging) properties from the SSL context associated with
+<var>Stream</var>. If <var>Stream</var> is not an SSL stream, the 
+predicate raises a domain error. <var>Session</var> is a list of 
+properties, containing the following members:
+
+<dl class="latex">
+<dt><strong>ssl_version</strong>(<var>Version</var>)</dt>
+<dd class="defbody">
+The negotiated version of the session.
+</dd>
+<dt><strong>session_key</strong>(<var>Key</var>)</dt>
+<dd class="defbody">
+The key material used in SSLv2 connections (if present).
+</dd>
+<dt><strong>master_key</strong>(<var>Key</var>)</dt>
+<dd class="defbody">
+The key material comprising the master secret. This is generated from 
+the server_random, client_random and pre-master key.
+</dd>
+<dt><strong>client_random</strong>(<var>Random</var>)</dt>
+<dd class="defbody">
+The random data selected by the client during handshaking.
+</dd>
+<dt><strong>server_random</strong>(<var>Random</var>)</dt>
+<dd class="defbody">
+The random data selected by the server during handshaking.
+</dd>
+<dt><strong>session_id</strong>(<var>SessionId</var>)</dt>
+<dd class="defbody">
+The SSLv3 session ID. Note that if ECDHE is being used (which is the 
+default for newer versions of OpenSSL), this data will not actually be 
+sent to the server.
+</dd>
+</dl>
+
+</dd>
+<dt class="pubdef"><a name="load_certificate/2"><strong>load_certificate</strong>(<var>+Stream, 
+-Certificate</var>)</a></dt>
+<dd class="defbody">
+Loads a certificate from a PEM- or DER-encoded stream, returning a term 
+which will unify with the same certificate if presented in 
+cert_verify_hook. A certificate is a list containing the following 
+terms: <a name="idx:issuername1:11"></a><span class="pred-ext">issuer_name/1</span>, <a name="idx:hash1:12"></a><span class="pred-ext">hash/1</span>, <a name="idx:signature1:13"></a><span class="pred-ext">signature/1</span>, <a name="idx:version1:14"></a><span class="pred-ext">version/1</span>, <a name="idx:notbefore1:15"></a><span class="pred-ext">notbefore/1</span>,
+<a name="idx:notafter1:16"></a><span class="pred-ext">notafter/1</span>, <a name="idx:serial1:17"></a><span class="pred-ext">serial/1</span>, <a name="idx:subject1:18"></a><span class="pred-ext">subject/1</span> 
+and <a name="idx:key1:19"></a><span class="pred-ext">key/1</span>. <a name="idx:subject1:20"></a><span class="pred-ext">subject/1</span> 
+and issuer_name are both lists of =/2 terms representing the name.</dd>
+<dt class="pubdef"><a name="load_crl/2"><strong>load_crl</strong>(<var>+Stream, 
+-CRL</var>)</a></dt>
+<dd class="defbody">
+Loads a CRL from a PEM- or DER-encoded stream, returning a term 
+containing terms <a name="idx:hash1:21"></a><span class="pred-ext">hash/1</span>, <a name="idx:signature1:22"></a><span class="pred-ext">signature/1</span>, <a name="idx:issuername1:23"></a><span class="pred-ext">issuer_name/1</span> 
+and <a name="idx:revocations1:24"></a><span class="pred-ext">revocations/1</span>, 
+which is a list of <a name="idx:revoked2:25"></a><span class="pred-ext">revoked/2</span> 
+terms. Each <a name="idx:revoked2:26"></a><span class="pred-ext">revoked/2</span> 
+term is of the form revoked(+Serial, DateOfRevocation)
+</dd>
+</dl>
+
+<p><h2 id="sec:ssl-compatibility"><a name="sec:4"><span class="sec-nr">4</span> <span class="sec-title">Backward 
+compatibility</span></a></h2>
+
+<a name="sec:ssl-compatibility"></a>
+
+<p>There are some predicates included to provide an API similar to the 
+one exposed by a previous version of the library.
+
+<dl class="latex">
+<dt class="pubdef"><a name="ssl_init/3"><strong>ssl_init</strong>(<var>-SSL, 
++Role, +Options</var>)</a></dt>
+<dd class="defbody">
+Analogous to <a name="idx:sslcontext3:27"></a><a class="pred" href="#ssl_context/3">ssl_context/3</a>.</dd>
+<dt class="pubdef"><a name="ssl_accept/3"><strong>ssl_accept</strong>(<var>+SSL, 
+-Socket, -Peer</var>)</a></dt>
+<dd class="defbody">
+Blocks until a connection is made to the host on the port specified by 
+the SSL object. <var>Socket</var> and <var>Peer</var> are then returned.</dd>
+<dt class="pubdef"><a name="ssl_open/3"><strong>ssl_open</strong>(<var>+SSL, 
+-Read, -Write</var>)</a></dt>
+<dd class="defbody">
+(Client) Connect to the host and port specified by the SSL object, 
+negotiate an SSL connection and return Read and Write streams if 
+successful</dd>
+<dt class="pubdef"><a name="ssl_open/3"><strong>ssl_open</strong>(<var>+SSL, 
++Socket -Read, -Write</var>)</a></dt>
+<dd class="defbody">
+(Server) Given the <var>Socket</var> returned from <a name="idx:sslaccept3:28"></a><a class="pred" href="#ssl_accept/3">ssl_accept/3</a>, 
+negotiate the connection on the accepted socket and return Read and 
+Write streams if successful.</dd>
+<dt class="pubdef"><a name="ssl_exit/1"><strong>ssl_exit</strong>(<var>+SSL</var>)</a></dt>
+<dd class="defbody">
+Previously, this predicate released resources associated with the 
+context. This is now handled by the garbage collector. For backward 
+compatibility, this predicate succeeds vacuously.
+
+<p></dd>
+</dl>
+
+<p><h2 id="sec:ssl-https"><a name="sec:5"><span class="sec-nr">5</span> <span class="sec-title">Using 
+SSL to provide and access HTTPS</span></a></h2>
+
+<a name="sec:ssl-https"></a>
+
+<p>This packages installs the library <code>library(http/http_ssl_plugin.pl)</code> 
+alongside the http package. This library is a plugin for
+<code>library(http/thread_httpd.pl)</code> and <code>library(http/http_open.pl)</code> 
+that enables these libraries to serve and access HTTPS services. Note 
+that HTTPS is simply HTTP over an SSL socket.
+
+<p><h3 id="sec:ssl-https-client"><a name="sec:5.1"><span class="sec-nr">5.1</span> <span class="sec-title">Accessing 
+an HTTPS server</span></a></h3>
+
+<a name="sec:ssl-https-client"></a>
+
+<p>Accessing an =|https://|= server can be achieved using the code 
+skeleton below. See <a name="idx:sslcontext3:29"></a><a class="pred" href="#ssl_context/3">ssl_context/3</a> 
+for the <code>cert_verify_hook(:Hook)</code> option.
+
+<pre class="code">
+:- use_module(library(http/http_open)).
+:- use_module(library(http/http_ssl_plugin)).
+
+cert_verify(_SSL, _ProblemCert, _AllCerts, _FirstCert, _Error) :-
+        format(user_error, 'Accepting certificate~n', []).
+
+        ...,
+        http_open(HTTPS_url, In,
+                  [ cert_verify_hook(cert_verify)
+                  ]),
+        ...
+</pre>
+
+<p><h3 id="sec:ssl-https-server"><a name="sec:5.2"><span class="sec-nr">5.2</span> <span class="sec-title">Creating 
+an HTTPS server</span></a></h3>
+
+<a name="sec:ssl-https-server"></a>
+
+<p>The HTTP server is started in HTTPS mode by adding an option <code>ssl</code> 
+to <a name="idx:httpserver2:30"></a><span class="pred-ext">http_server/2</span>. 
+The argument of the <code>ssl</code> option is an option list passed to <a name="idx:sslinit3:31"></a><a class="pred" href="#ssl_init/3">ssl_init/3</a>. 
+Here is an example that uses the demo certificates distributed with the 
+SSL package.
+
+<pre class="code">
+:- use_module(library(http/thread_httpd)).
+:- use_module(library(http/http_ssl_plugin)).
+
+https_server(Port, Options) :-
+        http_server(reply,
+                    [ port(Port),
+                      timeout(60),
+                      ssl([ host('localhost'),
+                            cacert_file('etc/demoCA/cacert.pem'),
+                            certificate_file('etc/server/server-cert.pem'),
+                            key_file('etc/server/server-key.pem'),
+                            password('apenoot1')
+                          ])
+                    | Options
+                    ]).
+</pre>
+
+<p><h2 id="sec:ssl-examples"><a name="sec:6"><span class="sec-nr">6</span> <span class="sec-title">Example 
+code</span></a></h2>
+
+<a name="sec:ssl-examples"></a>
+
+<p>Examples of a simple server and client (<code>server.pl</code> and
+<code>client.pl</code> as well as a simple HTTPS server (<code>https.pl</code>) 
+can be found in the example directory which is located in
+<code>doc/packages/examples/ssl</code> relative to the SWI-Prolog 
+installation directory. The <code>etc</code> directory contains example 
+certificate files as well as a <code>README</code> on the creation of 
+certificates using OpenSSL tools.
+
+<p><h2 id="sec:ssl-install"><a name="sec:7"><span class="sec-nr">7</span> <span class="sec-title">Installation</span></a></h2>
+
+<a name="sec:ssl-install"></a>
+
+<p>The OpenSSL libraries are <em>not</em> part of the SWI-Prolog 
+distribution and on systems using packagers with dependency checking, 
+dependency on OpenSSL is deliberatly avoided. This implies that OpenSSL 
+must be installed seperatly before using SSL with a binary distribution 
+of SWI-Prolog. Most modern Linux distributions have an SSL package. An 
+installer for MS-Windows is available from
+<a class="url" href="http://www.slproweb.com/products/Win32OpenSSL.html">http://www.slproweb.com/products/Win32OpenSSL.html</a> 
+The SWI-Prolog SSL interface is currently built using OpenSSL 0.97b.
+
+<p>When installing from the source, the package configuration 
+automatically builds the ssl library if a suitable OpenSSL 
+implementation is found. On Windows systems, OpenSSL must be installed 
+prior to building SWI-Prolog and <code>rules.mk</code> must be edited to 
+reflect the position of the header and libraries if they are not in the 
+standard search path.
+
+<p><h2 id="sec:ssl-thread-safety"><a name="sec:8"><span class="sec-nr">8</span> <span class="sec-title">Multithreading</span></a></h2>
+
+<a name="sec:ssl-thread-safety"></a>
+
+<p>OpenSSL is not intrinsically threadsafe, but can be made so by 
+providing some callbacks for managing locking. These callbacks are 
+installed when the ssl4pl library is loaded, and will overwrite any 
+existing callbacks.
+
+<p>When the ssl4pl library is unloaded, the original callbacks will be 
+restored.
+
+<p><h2 id="sec:ssl-acknowledgments"><a name="sec:9"><span class="sec-nr">9</span> <span class="sec-title">Acknowledgments</span></a></h2>
+
+<a name="sec:ssl-acknowledgments"></a>
+
+<p>The development of the SWI-Prolog SSL interface has been sponsored by
+<a class="url" href="http://www.sss.co.nz">Scientific Software and 
+Systems Limited</a>.
+
+<h1><a name="document-index">Index</a></h1>
+
+<dl>
+<dt class="index-sep">?</dt>
+<dt>hash/1</dt>
+<dd>
+<a class="idx" href="#idx:hash1:12">3</a> <a class="idx" href="#idx:hash1:21">3</a></dd>
+<dt>http_server/2</dt>
+<dd>
+<a class="idx" href="#idx:httpserver2:30">5.2</a></dd>
+<dt>issuer_name/1</dt>
+<dd>
+<a class="idx" href="#idx:issuername1:11">3</a> <a class="idx" href="#idx:issuername1:23">3</a></dd>
+<dt>key/1</dt>
+<dd>
+<a class="idx" href="#idx:key1:19">3</a></dd>
+<dt><a class="idx" href="#load_certificate/2">load_certificate/2</a></dt>
+<dt><a class="idx" href="#load_crl/2">load_crl/2</a></dt>
+<dt>notafter/1</dt>
+<dd>
+<a class="idx" href="#idx:notafter1:16">3</a></dd>
+<dt>notbefore/1</dt>
+<dd>
+<a class="idx" href="#idx:notbefore1:15">3</a></dd>
+<dt>revocations/1</dt>
+<dd>
+<a class="idx" href="#idx:revocations1:24">3</a></dd>
+<dt>revoked/2</dt>
+<dd>
+<a class="idx" href="#idx:revoked2:25">3</a> <a class="idx" href="#idx:revoked2:26">3</a></dd>
+<dt>serial/1</dt>
+<dd>
+<a class="idx" href="#idx:serial1:17">3</a></dd>
+<dt>signature/1</dt>
+<dd>
+<a class="idx" href="#idx:signature1:13">3</a> <a class="idx" href="#idx:signature1:22">3</a></dd>
+<dt><a class="idx" href="#ssl_accept/3">ssl_accept/3</a></dt>
+<dd>
+<a class="idx" href="#idx:sslaccept3:28">4</a></dd>
+<dt><a class="idx" href="#ssl_context/3">ssl_context/3</a></dt>
+<dd>
+<a class="idx" href="#idx:sslcontext3:1">3</a> <a class="idx" href="#idx:sslcontext3:2">3</a> <a class="idx" href="#idx:sslcontext3:27">4</a> <a class="idx" href="#idx:sslcontext3:29">5.1</a></dd>
+<dt><a class="idx" href="#ssl_exit/1">ssl_exit/1</a></dt>
+<dt><a class="idx" href="#ssl_init/3">ssl_init/3</a></dt>
+<dd>
+<a class="idx" href="#idx:sslinit3:31">5.2</a></dd>
+<dt><a class="idx" href="#ssl_negotiate/5">ssl_negotiate/5</a></dt>
+<dd>
+<a class="idx" href="#idx:sslnegotiate5:9">3</a> <a class="idx" href="#idx:sslnegotiate5:10">3</a></dd>
+<dt><a class="idx" href="#ssl_open/3">ssl_open/3</a></dt>
+<dt><a class="idx" href="#ssl_session/2">ssl_session/2</a></dt>
+<dt>subject/1</dt>
+<dd>
+<a class="idx" href="#idx:subject1:18">3</a> <a class="idx" href="#idx:subject1:20">3</a></dd>
+<dt>tcp_accept/3</dt>
+<dd>
+<a class="idx" href="#idx:tcpaccept3:5">3</a></dd>
+<dt>tcp_connect/2</dt>
+<dd>
+<a class="idx" href="#idx:tcpconnect2:6">3</a></dd>
+<dt>tcp_open_socket/3</dt>
+<dd>
+<a class="idx" href="#idx:tcpopensocket3:7">3</a> <a class="idx" href="#idx:tcpopensocket3:8">3</a></dd>
+<dt>tcp_socket/1</dt>
+<dd>
+<a class="idx" href="#idx:tcpsocket1:3">3</a> <a class="idx" href="#idx:tcpsocket1:4">3</a></dd>
+<dt>version/1</dt>
+<dd>
+<a class="idx" href="#idx:version1:14">3</a></dd>
+</dl>
+
+</body></html>

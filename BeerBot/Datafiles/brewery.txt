@@ -1,0 +1,8 @@
+1,DuClaw,Bel Air,1996
+2,Dogfish Head,Milton,1995
+3,Allagash,Portland,1994
+4,Flying Fish,Cherry Hill,1995
+5,Samuel Adams,Boston,1984
+6,Firestone Walker,Buellton,1996
+7,Left Hand,Longmont,1994
+8,Stone,Escondido,1996

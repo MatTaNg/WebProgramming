@@ -1,0 +1,453 @@
+<style type="text/css">
+
+html {
+	box-sizing: border-box;
+}
+*, *:before, *:after {
+	box-sizing: inherit;
+}
+
+body{
+	font: 100%;
+
+	/*/1.4 Verdana, Arial, Helvetica, sans-serif;*/
+	background-color: #05182B;
+	margin: 0;
+	padding: 0;
+	color: #000;
+}
+
+.articleDate {
+	font-style: italic;
+	font: 12px/1.4 'Times New Roman', sans-serif;
+}
+
+.recentArticleTitle {
+	font-weight: bold;
+	font-size: 18pt;
+	padding-bottom: 5px;
+}
+
+.recentArticleTitle a{
+	text-decoration: none;
+	color: #000;
+}
+
+.my_hover{
+	border: solid #00f 10px;
+}
+
+#plus {
+
+}
+
+#minus {
+
+}
+
+#content {
+	font: 14px/1.4 'Times New Roman', sans-serif;
+	width: 100%;
+
+	background-color: #05182B;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#searchBar {
+	font: 14px/1.4 'Times New Roman', sans-serif;
+	color:black;
+	width: 250px;
+	height:26px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+	left: 80%;
+	top: -150px;
+	margin-bottom: 10px;
+	z-index: 5;
+}
+
+#socialNetworks {
+	position: relative;
+	left: 83%;
+	width: 15%;
+	top: -70px;
+}
+
+#contentBackground {
+	background-color: #05182B;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	position:relative;
+	bottom: 85px;
+}
+
+#header {
+	height: 127 px;
+	width: 100%;
+	/*width: 1100px;*/
+}
+
+.sections {
+	width:100%;
+	height:100%;
+	display:block;
+}
+
+#menuBar {
+width: 100%;
+/*width:1100px;*/
+position: relative;
+bottom: 85px;
+word-spacing:150px;
+text-align: center;
+font-size: 14pt;
+background-color: #FA6900;
+margin: 0px;
+margin-bottom: 10px;
+padding-left: 0px;
+border: 2px solid black;
+}
+
+#menuBar a{
+	color: black;
+	text-decoration:none;
+}
+
+#leftSidebar {
+	float:left;
+	margin-left: 20px;
+	height: 100%;
+	width: 15%;
+	}
+	
+.leftContainer {
+	background-color: #fff;
+	margin: 10px;
+	/*width: 15%;*/
+	width: 80%;
+	height: 275px;
+	padding: 8px;
+	border: 2px solid black;
+	}
+	
+.leftBanner {
+	font: 14px/1.4 'Times New Roman', sans-serif;
+	background-color: #FA6900;
+	color:black;
+	width: 92%;
+	height:26px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+	left: 10%;
+	top: -27px;
+}
+	
+/*.bannerLogo {
+	float: left;
+	padding-right: 4px;
+	padding-bottom: 4px;
+	padding-top: 5px;
+	padding-left: 2px;
+	}*/
+	
+.topLeftExcerpt {
+	position: relative;
+	left: 0px;
+	top: -30px;
+	color: #244f4f;
+	font-size: 10pt;
+}
+
+.recentArticles {
+	background-color: #fff;
+	margin: 10px;
+	/*width: 20%;*/
+	width: 80%;
+	
+	height: 2%;
+	padding: 8px;
+	border: 2px solid black;
+	font-size: 10pt;
+	}
+
+.horzRule {
+	background-color: #000;
+	height: 2px;
+	width: 90%;
+	margin-left: 3px;
+	position: relative;
+	margin-bottom: 10px;
+	top: 5px;
+}
+
+.middleColumn {
+	width: 30%;
+	float: left;
+	padding-top: 50px;
+}
+
+.middleCol {
+	width: 52%;
+	float: left;
+	padding-top:50px;
+	margin-left: 50px;
+	margin-right: 50px;
+	background-color: #ffc150;
+}
+
+.events {
+	border: 3px black solid;
+	background-color: #FFF;
+	height: 150px;
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+.secBox {
+	border: 3px black solid;
+	background-color: #FFF;
+	font: 16pt;
+	width: 80%;
+	padding: 10px;
+}
+
+.sectionBox {
+	background-color: #FFF;
+	border: 3px solid #000;
+	margin-top: 20px;
+	width: 80%;
+	height: 230px;
+	text-align: right;
+	position: relative;
+	margin-right: auto;
+	margin-left: auto;
+	z-index: 2;
+}
+
+.middleBannerTitle {
+	font: 14px/1.4 'Times New Roman', sans-serif;
+	background-color: #FA6900;
+	color:black;
+	width: 30%;
+	height:26px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+	left: 68.5%;
+	top: 0px;
+	margin-bottom: 10px;
+	z-index: 5;
+}
+
+.middleImage {
+	position: relative;
+	top: -36px;
+	left: 0px;
+	width: 100%;
+}
+
+#rightSidebar {
+	float: left;
+	margin-left: 0px;
+	margin-right: 10px;
+	/*height: 100%;*/
+	width: 17%;
+
+}
+
+.subscribeContainer {
+	background-color: #FFF;
+	border: 5px solid #000;
+
+	width: 85%;
+	height: 340px;
+	padding: 2px;
+	position: relative;
+	}
+	
+.error{
+    width:200px;
+    height:50px;
+    border:2px solid #eee;
+    background:black;
+    color:white;
+    font-family:Calibri;
+    line-height:50px;
+    text-align:center;
+    font-size:15px;
+    position:absolute;
+    left:50%;
+    margin-left:-250px;
+}	
+
+.rightBannerTitle {
+	font: 14px/1.4 'Times New Roman', sans-serif;
+	background-color: #FA6900;
+	color:black;
+	width: 80%;
+	height:26px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+	left: 18%;
+	top: -22px;
+	margin-bottom: 10px;
+	z-index: 5;
+}
+
+#ebookForm {
+	position: relative;
+	width: 80%;
+	top: -20px;
+	left: 5px;
+}
+
+.whatsHot {
+	background-color: #FFF;
+	border: 3px solid #000;
+	margin-top: 10px;
+	width: 85%;
+	height: 820px;
+	padding: 2px;
+
+	}
+	
+#facebook {
+	width: 40px;
+	height:40px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+
+}
+
+#instagram {
+	width: 40px;
+	height:40px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+
+}
+
+#twitter {
+	width: 40px;
+	height:40px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+
+}
+
+
+.comment {
+	
+}
+
+.commentName {
+	font: 18px/1.4 'Times New Roman', sans-serif;
+	font-style: bold;
+}
+
+.commentBox {
+	text-align:center;
+}
+
+.articleMiddleColumn {
+	background-color: #FFF;
+	width: 55%;
+	float: left;
+	margin: 10px;
+	margin-left: 50px;
+	margin-right: 50px;
+	padding-top: 50px;
+	border: 3px solid black;
+}
+
+.article {
+	position:relative;
+	top: -30px;
+	left: 10px;
+	padding-left:5px;
+	padding-right: 20px;
+	
+}
+
+.articleTitle {
+	font-weight: bold;
+	font-size: 24pt;
+	padding-bottom: 5px;
+}
+
+.articleTitle a{
+	text-decoration: none;
+	color: #000;
+}
+
+.articleImage {
+	padding-bottom: 5px;
+	padding-right:10px;
+	float: left;
+}
+
+#girlsImage {
+	padding-left: 10px;
+	padding-top: 20px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#center {
+	text-align:center;
+}
+
+.articlehorzRule {
+	background-color: #000;
+	height: 2px;
+	width: 90%;
+	margin-left: auto;
+	margin-right: auto;
+	position: relative;
+	margin-bottom: 30px;
+	top: -15px;
+}
+
+.articleMiddleBannerTitle {
+	font: 14px/1.4 'Times New Roman', sans-serif;
+	background-color: #FA6900;
+	color:black;
+	width: 30%;
+	height:26px;
+	text-align: right;
+	padding-right: 6px;
+	position: relative;
+	left: 69.2%;
+	top: -50px;
+	margin-bottom: 10px;
+	z-index: 5;
+}
+
+.articleLikes {
+	height: 50px;
+}
+
+.subscribeThankYou {
+	font-weight: bold;
+	font: 38px 'Times New Roman', sans-serif;
+}
+
+.pageNav {
+	float: right;
+	padding: 5px;
+}
+
+#memes {
+	width: 250px;
+	height: 250px;
+	float: left;
+	margin: 20px;
+}
+</style>
